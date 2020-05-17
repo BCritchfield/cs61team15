@@ -5,12 +5,18 @@ body, html {
     height: 100%;
     margin: 0;
     padding: 0;
+
   }
 
 
-.active {
-  color: pink;
+.app-header{
+  font-weight: 700;
+  font-size: 30px;
+  margin: 0;
+  margin-top: 10px;
+
 }
+
 
 /** SIDEBAR STYLES **/
 
@@ -24,6 +30,8 @@ body, html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
 
   .profile-picture{
     height: 100px;
@@ -94,4 +102,22 @@ body, html {
   flex-direction: column;
   align-items: center;
 
+
+}
+
+.bottom-dashboard{
+  display: flex;
+
+}
+
+.bottom-dashboard > *{
+  flex-grow: 1;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+  .bottom-dashboard {
+    display: inline;
+  }
 }

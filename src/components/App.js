@@ -7,13 +7,33 @@ import {
 import Sidebar from './Sidebar';
 import Buildings from './Buildings';
 import Doctors from './Doctors';
+import Waiting from './Waiting';
+import Stats from './Stats';
 import '../style.scss';
 
 const Dashboard = (props) => {
   return (
     <div style={{ height: '100vh', display: 'flex' }}>
       <Sidebar />
-      <div style={{ flexGrow: '1', display: 'flex', flexDirection: 'column' }}><Buildings /><div><div>Doctors<Doctors /></div><div>Patients</div></div></div>
+      <div style={{
+        paddingLeft: '190px', flexGrow: '1', display: 'flex', flexDirection: 'column',
+      }}
+      >
+        <p className="app-header">COVID-19 Hospital Overview</p>
+        <Buildings />
+        <div className="bottom-dashboard">
+          <div>
+            Doctors
+            <Doctors />
+          </div>
+          <div>
+            Waiting List
+            <Waiting />
+            Stats
+            <Stats />
+          </div>
+        </div>
+      </div>
 
 
     </div>
