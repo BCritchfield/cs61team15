@@ -24,7 +24,7 @@ const Dashboard = (props) => {
         <div className="bottom-dashboard">
           <div>
             Doctors
-            <Doctors />
+            <Doctors doctor="test" />
           </div>
           <div>
             Waiting List
