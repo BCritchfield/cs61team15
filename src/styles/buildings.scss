@@ -35,3 +35,17 @@ $light-grey: #f1f1f1;
 
   }
 }
+
+
+/** BUILDING MODAL STYLES **/
+
+.patient{
+  padding: 10px 20px 10px 20px;
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.patient:hover{
+  font-weight: 500;
+  cursor: pointer;
+  background: rgb(103, 115, 243);
+}

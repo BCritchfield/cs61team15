@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import Dropdown from 'react-dropdown';
+
 import 'react-dropdown/style.css';
 import '../styles/Doctors.scss';
 
 
-const DoctorModal = (props) => {
+const BuildingModal = (props) => {
   return (
     <ReactModal
       isOpen={props.open}
@@ -15,8 +15,8 @@ const DoctorModal = (props) => {
           content: {
             position: 'fixed',
             left: 'calc(50vw - 200px)',
-            height: '280px',
-            overflow: 'display',
+
+            overflow: 'scroll',
             width: '400px',
             padding: '10px',
             paddingTop: '20px',
@@ -33,26 +33,31 @@ const DoctorModal = (props) => {
     >
       <div className="doctor-info">
         <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
-          <p>{props.doctor}</p>
+          <p>{props.hospital}</p>
           <button type="submit" onClick={props.onRequestClose}>x</button>
         </div>
 
-        <p>Section Assignment: Smith Ward</p>
-        <p>COVID Status: Negative</p>
+        {props.patients.map((patient) => { return (<div className="patient">{patient}</div>); })}
       </div>
-      <div className="doctor-actions">
-        <div className="change-section">
-          <p>Change Section Assignment</p>
+      <div className="doctor-actions"
+        style={{
+          justifyContent: 'center', alignItems: 'center', marginTop: '10px', flexDirection: 'column',
+        }}
+      >
+        <input style={{
+          textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
+        }}
+          placeholder="Enter new patient name"
+        />
 
+        <div className="change-section">
+          <p>Check-In New Patient</p>
         </div>
-        <div className="doctor-delete">
-          <p>Delete</p>
-        </div>
+
       </div>
-      <Dropdown style={{ margin: '20px' }} options={['option 1', 'option 2', 'option3']} placeholder="Select new section" />
 
     </ReactModal>
   );
 };
 
-export default DoctorModal;
+export default BuildingModal;
