@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.scss';
 
 
-class Doctors extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,16 +17,17 @@ class Doctors extends React.Component {
     return (
       <div className="login-page">
         <div className="header">
-          <p>COVID-19 Hospital Management System</p>
-          <p>By Team15: Brittany Critchfield, Steven Karson, Sam Schiff, Eric Zhang</p>
+          <p className="title">COVID-19 Hospital Management System</p>
+          <p className="subtitle">By Team15: Brittany Critchfield, Steven Karson, Sam Schiff, Eric Zhang</p>
         </div>
         <div className="login-div">
           <input placeholder="Username" />
           <input placeholder="Password" />
+          <form action="/dashboard"><button type="submit">Login</button></form>
         </div>
       </div>
     );
   }
 }
 
-export default Doctors;
+export default Login;

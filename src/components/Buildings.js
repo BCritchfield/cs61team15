@@ -7,7 +7,7 @@ class Buildings extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalOpen: true,
+      modalOpen: false,
       currentBuilding: null,
     };
   }
