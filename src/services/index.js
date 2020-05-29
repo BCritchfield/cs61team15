@@ -40,6 +40,7 @@ export const deletePerson = (personId) => {
       return response.data;
     });
 };
+
 export const getAllDoctors = () => {
   return axios.get(`${url}/doctor/all`)
     .then((response) => {
@@ -50,6 +51,17 @@ export const getAllDoctors = () => {
 
 export const getPatient = (personId) => {
   return axios.get(`${url}/patient`, { params: { personId } })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    });
+};
+
+export const deletePatient = (personId) => {
+  console.log('DELETING PATIENT, personId is');
+  console.log(personId);
+
+  return axios.delete(`${url}/patient`, { data: { personId } })
     .then((response) => {
       console.log(response);
       return response.data;

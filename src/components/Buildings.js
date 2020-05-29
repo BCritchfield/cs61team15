@@ -1,6 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import '../styles/Buildings.scss';
 import BuildingModal from './BuildingModal';
+import { getPatientsAction } from '../actions';
 
 
 class Buildings extends React.Component {
@@ -12,17 +15,32 @@ class Buildings extends React.Component {
     };
   }
 
+  onComponentDidMount() {
+    this.props.getPatients();
+  }
 
   render() {
-    const hospitals = ['Smith Ward', 'Inpatient Building 3', 'ICU Ward #1', 'CNT Building', 'COVID Temporary Ward'];
-    const patients = ['Patient 1', 'Patient 2', 'Patient 3', 'Patient 1', 'Patient 2', 'Patient 3', 'Patient 1', 'Patient 2', 'Patient 3', 'Patient 1', 'Patient 2', 'Patient 3'];
+    if (!this.props.wards) {
+      return <div />;
+    }
     return (
       <div className="buildings">
-        <BuildingModal hospital={this.state.currentBuilding} onRequestClose={() => { this.setState({ modalOpen: false }); }} patients={patients} open={this.state.modalOpen} />
-        {hospitals.map((hospital) => <div role="button" tabIndex="0" onClick={() => { this.setState({ modalOpen: true, currentBuilding: hospital }); }} className="building">{hospital}</div>)}
+        <BuildingModal hospital={this.state.currentBuilding} onRequestClose={() => { this.setState({ modalOpen: false }); }} patients={this.props.patients} open={this.state.modalOpen} />
+        {
+          this.props.wards.map(
+            (ward) => <div key={ward.WardName} role="button" tabIndex="0" onClick={() => { this.setState({ modalOpen: true, currentBuilding: ward }); }} className="building">{ward.WardName}</div>,
+          )
+        }
       </div>
     );
   }
 }
 
-export default Buildings;
+const mapStateToProps = (state) => (
+  {
+    patients: state.people.patients,
+
+  }
+);
+
+export default withRouter(connect(mapStateToProps, { getPatientsAction })(Buildings));

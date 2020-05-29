@@ -1,4 +1,3 @@
-import { setDoctorsAction, setPatientsAction } from '../actions';
 
 const initialState = {
   doctors: [],
@@ -7,9 +6,9 @@ const initialState = {
 
 const PeopleReducer = (state = initialState, action) => {
   switch (action.type) {
-    case setDoctorsAction:
+    case 'SET_DOCTORS':
       return { doctors: action.payload, patients: state.patients };
-    case setPatientsAction:
+    case 'SET_PATIENTS':
       return { doctors: state.doctors, patients: action.payload };
     default:
       return state;

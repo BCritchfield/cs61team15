@@ -8,26 +8,18 @@ import Buildings from './Buildings';
 import Doctors from './Doctors';
 import Waiting from './Waiting';
 import Stats from './Stats';
-import { getPatientsAction, getDoctorsAction } from '../actions';
+import { getPatientsAction, getDoctorsAction, getWardsAction } from '../actions';
 import '../style.scss';
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      doctors: null,
-      patients: null,
-    };
-  }
-
   componentDidMount() {
     this.props.getPatientsAction();
     this.props.getDoctorsAction();
+    this.props.getWardsAction();
   }
 
   render() {
-    console.log(this.state);
-    console.log('this.props');
+    console.log('dashboard props');
     console.log(this.props);
     return (
       <div style={{ height: '100vh', display: 'flex' }}>
@@ -37,11 +29,11 @@ class Dashboard extends React.Component {
         }}
         >
           <p className="app-header">COVID-19 Hospital Overview</p>
-          <Buildings />
+          <Buildings wards={this.props.wards} />
           <div className="bottom-dashboard">
             <div>
               Doctors
-              <Doctors doctor="test" />
+              <Doctors doctors={this.props.people.doctors} doctor="test" />
             </div>
             <div>
               Waiting List
@@ -61,7 +53,8 @@ class Dashboard extends React.Component {
 const mapStateToProps = (state) => (
   {
     people: state.people,
+    wards: state.wards.ward,
   }
 );
 
-export default withRouter(connect(mapStateToProps, { getPatientsAction, getDoctorsAction })(Dashboard));
+export default withRouter(connect(mapStateToProps, { getPatientsAction, getDoctorsAction, getWardsAction })(Dashboard));

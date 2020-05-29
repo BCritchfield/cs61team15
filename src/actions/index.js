@@ -1,5 +1,5 @@
 import {
-  getDoctor, getPatient, getWard, getBed, getAllDoctors, getAllPatients, getAllWards,
+  getDoctor, getPatient, getWard, getBed, getAllDoctors, getAllPatients, getAllWards, createPatient, deletePatient,
 } from '../services';
 
 export const setDoctorAction = (payload) => ({
@@ -22,13 +22,13 @@ export const setBedAction = (payload) => ({
   payload,
 });
 
-export const setDoctorsAction = (payload) => ({
-  type: 'SetDoctorsAction',
-  payload,
-});
+// export const setDoctorsAction = (payload) => ({
+//   type: 'SetDoctorsAction',
+//   payload,
+// });
 
 export const setPatientsAction = (payload) => ({
-  type: 'SetDoctorsAction',
+  type: 'SetPatientsAction',
   payload,
 });
 
@@ -72,7 +72,7 @@ export const getBedAction = (bedId) => {
 export const getDoctorsAction = () => {
   return (dispatch) => {
     return getAllDoctors().then((doctors) => {
-      dispatch(setDoctorsAction(doctors));
+      dispatch({ type: 'SET_DOCTORS', payload: doctors });
     });
   };
 };
@@ -80,7 +80,7 @@ export const getDoctorsAction = () => {
 export const getPatientsAction = () => {
   return (dispatch) => {
     return getAllPatients().then((patients) => {
-      dispatch(setPatientsAction(patients));
+      dispatch({ type: 'SET_PATIENTS', payload: patients });
     });
   };
 };
@@ -88,7 +88,24 @@ export const getPatientsAction = () => {
 export const getWardsAction = () => {
   return (dispatch) => {
     return getAllWards().then((wards) => {
-      dispatch(setWardsAction(wards));
+      dispatch({ type: 'SET_WARDS', payload: wards });
+    });
+  };
+};
+
+export const createPatientAction = (firstName, lastName, age = null, COVID) => {
+  return (dispatch) => {
+    return createPatient(firstName, lastName, age, COVID).then(() => {
+      dispatch(getPatientsAction());
+    });
+  };
+};
+
+export const deletePatientAction = (personId) => {
+  return (dispatch) => {
+    return deletePatient(personId).then(() => {
+      dispatch(getPatientsAction());
+      dispatch(getDoctorsAction());
     });
   };
 };

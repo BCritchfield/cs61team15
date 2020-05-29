@@ -6,6 +6,9 @@ import '../styles/Doctors.scss';
 
 
 const DoctorModal = (props) => {
+  if (!props.doctor) {
+    return <div />;
+  }
   return (
     <ReactModal
       isOpen={props.open}
@@ -33,12 +36,12 @@ const DoctorModal = (props) => {
     >
       <div className="doctor-info">
         <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
-          <p>{props.doctor}</p>
+          <p>{props.doctor.FirstName} {props.doctor.LastName}</p>
           <button type="submit" onClick={props.onRequestClose}>x</button>
         </div>
 
         <p>Section Assignment: Smith Ward</p>
-        <p>COVID Status: Negative</p>
+        <p>COVID Status: {props.doctor.COVIDPositive === 0 ? 'Negative' : 'Postive'}</p>
       </div>
       <div className="doctor-actions">
         <div className="change-section">
