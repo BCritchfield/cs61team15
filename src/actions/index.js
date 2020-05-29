@@ -71,7 +71,7 @@ export const getBedAction = (bedId) => {
 
 export const getDoctorsAction = () => {
   return (dispatch) => {
-    return getAllDoctors.then((doctors) => {
+    return getAllDoctors().then((doctors) => {
       dispatch(setDoctorsAction(doctors));
     });
   };
@@ -79,7 +79,7 @@ export const getDoctorsAction = () => {
 
 export const getPatientsAction = () => {
   return (dispatch) => {
-    return getAllPatients.then((patients) => {
+    return getAllPatients().then((patients) => {
       dispatch(setPatientsAction(patients));
     });
   };
@@ -87,7 +87,7 @@ export const getPatientsAction = () => {
 
 export const getWardsAction = () => {
   return (dispatch) => {
-    return getAllWards.then((wards) => {
+    return getAllWards().then((wards) => {
       dispatch(setWardsAction(wards));
     });
   };
