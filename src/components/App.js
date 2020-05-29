@@ -9,6 +9,7 @@ import Buildings from './Buildings';
 import Doctors from './Doctors';
 import Waiting from './Waiting';
 import Stats from './Stats';
+import Login from './Login';
 import '../style.scss';
 
 const Dashboard = (props) => {
@@ -51,7 +52,8 @@ const App = (props) => {
       <div>
 
         <Switch>
-          <Route exact path="/" component={Dashboard} />
+          <Route exact path="/" component={Login} />
+          <Route exact path="/dashboard" component={Dashboard} />
           <Route component={FallBack} />
         </Switch>
 
