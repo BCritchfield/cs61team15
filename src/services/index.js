@@ -76,7 +76,7 @@ export const checkInPatient = (personId) => {
     });
 };
 
-export const getAllPatient = () => {
+export const getAllPatients = () => {
   return axios.get(`${url}/patient/all`)
     .then((response) => {
       console.log(response);
