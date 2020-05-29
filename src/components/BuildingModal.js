@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import PatientModal from './PatientModal';
 
 import 'react-dropdown/style.css';
 import '../styles/Doctors.scss';
 
 
-const BuildingModal = (props) => {
-  return (
-    <ReactModal
-      isOpen={props.open}
-      shouldCloseOnOverlayClick
-      style={
+class BuildingModal extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      currentPatient: null,
+    };
+  }
+
+  render() {
+    return (
+      <ReactModal
+        isOpen={this.props.open}
+        shouldCloseOnOverlayClick
+        style={
         {
           content: {
             position: 'fixed',
@@ -30,34 +40,39 @@ const BuildingModal = (props) => {
           },
         }
       }
-    >
-      <div className="doctor-info">
-        <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
-          <p>{props.hospital}</p>
-          <button type="submit" onClick={props.onRequestClose}>x</button>
-        </div>
-
-        {props.patients.map((patient) => { return (<div className="patient">{patient}</div>); })}
-      </div>
-      <div className="doctor-actions"
-        style={{
-          justifyContent: 'center', alignItems: 'center', marginTop: '10px', flexDirection: 'column',
-        }}
       >
-        <input style={{
-          textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
-        }}
-          placeholder="Enter new patient name"
-        />
+        <PatientModal open={this.state.open} onRequestClose={() => { this.setState({ open: false }); }} patient={this.state.currentPatient} />
+        <div className="doctor-info">
+          <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
+            <p>{this.props.hospital}</p>
+            <button type="submit" onClick={this.props.onRequestClose}>x</button>
+          </div>
 
-        <div className="change-section">
-          <p>Check-In New Patient</p>
+          {this.props.patients.map((patient) => {
+            return (
+              <div role="button" tabIndex="0" onClick={() => { this.setState({ currentPatient: patient, open: true }); }} className="patient">{patient}</div>);
+          })}
+        </div>
+        <div className="doctor-actions"
+          style={{
+            justifyContent: 'center', alignItems: 'center', marginTop: '10px', flexDirection: 'column',
+          }}
+        >
+          <input style={{
+            textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
+          }}
+            placeholder="Enter new patient name"
+          />
+
+          <div className="change-section">
+            <p>Check-In New Patient</p>
+          </div>
+
         </div>
 
-      </div>
-
-    </ReactModal>
-  );
-};
+      </ReactModal>
+    );
+  }
+}
 
 export default BuildingModal;
