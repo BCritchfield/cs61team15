@@ -2,7 +2,6 @@ import React from 'react';
 import {
   BrowserRouter as Router, Route, Switch,
 } from 'react-router-dom';
-import * as Routes from '../services';
 
 
 import Sidebar from './Sidebar';
@@ -13,9 +12,6 @@ import Stats from './Stats';
 import '../style.scss';
 
 const Dashboard = (props) => {
-  Routes.getDoctor(238987611).then((data) => {
-    console.log(data);
-  });
   return (
     <div style={{ height: '100vh', display: 'flex' }}>
       <Sidebar />
