@@ -3,16 +3,29 @@ import '../styles/Doctors.scss';
 
 
 const Stats = (props) => {
+  console.log('stats props');
+  console.log(props);
+  const { data } = props;
+  console.log('stats data');
+  console.log(data);
+  if (!data || !data.people || !data.people.patients || !data.people.doctors) {
+    return <div />;
+  }
+  const waitingPatients = data.people.patients.filter((patient) => patient.WardID === null).length;
+  const totalPatients = data.people.patients.length;
+  const covidPatients = data.people.patients.filter((patient) => patient.COVIDPositive === 1).length;
+  const totalDoctors = data.people.doctors.length;
+  const covidDoctors = data.people.doctors.filter((patient) => patient.COVIDPositive === 1).length;
   return (
     <div className="stats">
       <div>
-        <p>Total Capacity: 1500</p>
-        <p>Totals Beds Filled: 1430</p>
-        <p>Available Beds: 70</p>
+        <p>Total Patients: {totalPatients}</p>
+        <p>Waiting Patients: {waitingPatients}</p>
+        <p>COVID-Positive Patients: {covidPatients}</p>
       </div>
       <div>
-        <p>Avg Doctor/Patient Ratio: 3.6</p>
-        <p>Total COVID Patients: 450</p>
+        <p>Total Doctors: {totalDoctors}</p>
+        <p>COVID-Positive Doctors: {covidDoctors}</p>
       </div>
     </div>
   );

@@ -13,8 +13,6 @@ class WaitingList extends React.Component {
   }
 
   render() {
-    console.log('Waiting List state');
-    console.log(this.state);
     return (
       <div className="waiting">
         {this.state.currentPatient
