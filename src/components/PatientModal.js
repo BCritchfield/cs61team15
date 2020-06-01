@@ -17,13 +17,11 @@ class PatientModal extends React.Component {
   }
 
   handleSubmit = () => {
-    console.log('pressed submit');
     // find ward with newSection name
     const section = this.props.wards.find((ward) => ward.WardName === this.state.newSection);
     // check that this has worked/exists
     if (section) {
       this.props.assignPatientAction(this.props.patient.PersonID, section.WardID);
-      console.log('requesting close');
       this.props.onRequestClose();
     }
   }
@@ -36,7 +34,7 @@ class PatientModal extends React.Component {
     console.log('PATIENT MODAL PROPS');
     console.log(this.props);
     const options = this.props.wards.map((ward) => { return ward.WardName; });
-    const wardAssignment = !this.props.patient ? null : this.props.wards.filter((ward) => { return ward.WardID === this.props.patient.WardID; });
+    const wardAssignment = !this.props.patient ? null : this.props.wards.find((ward) => { return ward.WardID === this.props.patient.WardID; });
     return (!this.props.patient ? <div />
       : (
         <ReactModal
@@ -70,7 +68,7 @@ class PatientModal extends React.Component {
               <button type="submit" onClick={this.props.onRequestClose}>x</button>
             </div>
 
-            <p>Section Assignment: {!wardAssignment ? '' : wardAssignment[0].WardName}</p>
+            <p>Section Assignment: {!wardAssignment ? '' : wardAssignment.WardName}</p>
             <p>COVID Status: {this.props.patient.COVIDPositive ? '1' : '0'}</p>
           </div>
           <div className="doctor-actions">

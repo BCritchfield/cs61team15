@@ -4,9 +4,14 @@ import '../style.scss';
 
 const Sidebar = (props) => {
   const testData = {
-    firstName: 'John',
+    firstName: 'Brittany',
     lastName: 'Doe',
   };
+
+  const d = new Date();
+  const hours = d.getHours() < 12 ? (d.getHours()) : (d.getHours() - 12);
+  const amPm = d.getHours() < 12 ? 'AM' : 'PM';
+
   return (
     <div className="sidebar">
       <div>
@@ -18,13 +23,13 @@ const Sidebar = (props) => {
         </div>
         <div className="text-box">
           <p>Your Hospital:</p>
-          <p>American Fork Community Hospital</p>
+          <p>Dartmouth Hitchcock Medical Center</p>
         </div>
       </div>
       <div>
         <div className="time-date">
-          <p>5/12/2020</p>
-          <p>4:55pm</p>
+          <p>{d.getMonth()}/{d.getDate()}/{d.getFullYear()}</p>
+          <p>{hours}:{d.getMinutes()}{amPm}</p>
         </div>
         <div>
           <button className="sign-out-button" type="submit">Sign Out</button>
