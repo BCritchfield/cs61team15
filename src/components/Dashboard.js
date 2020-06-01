@@ -37,7 +37,7 @@ class Dashboard extends React.Component {
             </div>
             <div>
               Waiting List
-              <Waiting patients={this.props.people.patients.filter((patient) => patient.BedID === null)} />
+              <Waiting patients={this.props.people.patients.filter((patient) => patient.WardID === null)} />
               Stats
               <Stats />
             </div>

@@ -1,5 +1,6 @@
 import {
   getDoctor, getPatient, getWard, getBed, getAllDoctors, getAllPatients, getAllWards, createPatient, deletePatient,
+  assignPatientToWard,
 } from '../services';
 
 export const setDoctorAction = (payload) => ({
@@ -106,6 +107,14 @@ export const deletePatientAction = (personId) => {
     return deletePatient(personId).then(() => {
       dispatch(getPatientsAction());
       dispatch(getDoctorsAction());
+    });
+  };
+};
+
+export const assignPatientAction = (personID, wardID) => {
+  return (dispatch) => {
+    return assignPatientToWard(personID, wardID).then(() => {
+      dispatch(getPatientsAction());
     });
   };
 };

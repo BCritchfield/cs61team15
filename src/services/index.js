@@ -63,6 +63,7 @@ export const deletePatient = (personId) => {
 
   return axios.delete(`${url}/patient`, { data: { personId } })
     .then((response) => {
+      console.log('here is the delete response');
       console.log(response);
       return response.data;
     });
@@ -138,6 +139,15 @@ export const createBed = (bedId, wardId) => {
 
 export const deleteBed = (bedId) => {
   return axios.delete(`${url}/bed`, { data: { bedId } })
+    .then((response) => {
+      console.log(response);
+      return response.data;
+    });
+};
+
+
+export const assignPatientToWard = (personId, wardId) => {
+  return axios.put(`${url}/patient/ward`, { personId, wardId })
     .then((response) => {
       console.log(response);
       return response.data;

@@ -1,17 +1,23 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import ReactModal from 'react-modal';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import '../styles/Doctors.scss';
+import { getPatientsAction, getDoctorsAction, getWardsAction } from '../actions';
 
 
 const DoctorModal = (props) => {
   if (!props.doctor) {
     return <div />;
   }
+
+  const options = props.wards ? props.wards.map((ward) => ward.WardName) : [];
   return (
     <ReactModal
       isOpen={props.open}
+      ariaHideApp={false}
       shouldCloseOnOverlayClick
       style={
         {
@@ -52,10 +58,17 @@ const DoctorModal = (props) => {
           <p>Delete</p>
         </div>
       </div>
-      <Dropdown style={{ margin: '20px' }} options={['option 1', 'option 2', 'option3']} placeholder="Select new section" />
+      <Dropdown style={{ margin: '20px' }} options={options} placeholder="Select new section" />
 
     </ReactModal>
   );
 };
+const mapStateToProps = (state) => (
+  {
+    people: state.people,
+    wards: state.wards.ward,
+  }
+);
 
-export default DoctorModal;
+
+export default withRouter(connect(mapStateToProps, { getPatientsAction, getDoctorsAction, getWardsAction })(DoctorModal));

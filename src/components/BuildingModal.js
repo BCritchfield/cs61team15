@@ -29,13 +29,13 @@ class BuildingModal extends React.Component {
   }
 
   render() {
-    console.log(this.state);
     if (!this.props.hospital) {
       return <div />;
     }
 
     return (
       <ReactModal
+        ariaHideApp={false}
         isOpen={this.props.open}
         shouldCloseOnOverlayClick
         style={
@@ -71,7 +71,7 @@ class BuildingModal extends React.Component {
             <button type="submit" onClick={this.props.onRequestClose}>x</button>
           </div>
 
-          {this.props.patients.map((patient) => {
+          {this.props.patients.filter((patient) => { return patient.WardID === this.props.hospital.WardID; }).map((patient) => {
             return (
               <div key={patient.PersonID}
                 role="button"
