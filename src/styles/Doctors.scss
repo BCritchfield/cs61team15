@@ -123,3 +123,15 @@ $light-grey: #f1f1f1;
   }
 }
 
+.add-new-patient{
+  padding: 0px;
+  margin: 0px;
+  font-weight: 600;
+  color: $dark-blue;
+  cursor: pointer;
+}
+
+.add-new-patient:hover{
+  text-shadow: 1px 1px 5px rgb(170, 170, 170);
+
+}

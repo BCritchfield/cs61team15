@@ -3,11 +3,7 @@ import '../styles/Doctors.scss';
 
 
 const Stats = (props) => {
-  console.log('stats props');
-  console.log(props);
   const { data } = props;
-  console.log('stats data');
-  console.log(data);
   if (!data || !data.people || !data.people.patients || !data.people.doctors) {
     return <div />;
   }

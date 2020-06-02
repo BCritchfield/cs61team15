@@ -15,10 +15,6 @@ class BuildingModal extends React.Component {
     this.state = {
       open: false,
       currentPatient: null,
-      firstName: '',
-      lastName: '',
-      age: '',
-      covid: false,
     };
   }
 
@@ -65,12 +61,15 @@ class BuildingModal extends React.Component {
           onRequestClose={() => { this.setState({ open: false }); }}
           patient={this.state.currentPatient}
         />
+        <div style={{
+          display: 'flex', lineHeight: '0', justifyContent: 'space-between', margin: '5px', fontWeight: '700',
+        }}
+        >
+          <p>{this.props.hospital.WardName} Patients</p>
+          <button type="submit" onClick={this.props.onRequestClose}>x</button>
+        </div>
         <div className="doctor-info">
-          <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
-            <p>{this.props.hospital.WardName}</p>
-            <button type="submit" onClick={this.props.onRequestClose}>x</button>
-          </div>
-
+          <span />
           {this.props.patients.filter((patient) => { return patient.WardID === this.props.hospital.WardID; }).map((patient) => {
             return (
               <div key={patient.PersonID}
@@ -83,73 +82,6 @@ class BuildingModal extends React.Component {
               </div>
             );
           })}
-        </div>
-        <div className="doctor-actions"
-          style={{
-            justifyContent: 'center', alignItems: 'center', marginTop: '10px', flexDirection: 'column',
-          }}
-        >
-          <input
-            type="text"
-            name="firstName"
-            onChange={this.handleChange}
-            value={this.state.firstName}
-            style={{
-              textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
-            }}
-            placeholder="Enter new patient first name"
-          />
-
-          <input
-            name="lastName"
-            value={this.state.lastName}
-            onChange={this.handleChange}
-            style={{
-              textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
-            }}
-            placeholder="Enter new patient last name"
-          />
-
-          <input
-            name="age"
-            value={this.state.age}
-            onChange={this.handleChange}
-            style={{
-              textAlign: 'center', width: '50%', margin: '10px', fontSize: '15px', border: 'none', borderBottom: '1px solid grey',
-            }}
-            placeholder="Enter new patient age"
-          />
-
-          <label htmlFor="covid"
-            style={{
-              textAlign: 'center', display: 'flex', flexDirection: ' column', justifyContent: 'center', alignItems: 'center',
-            }}
-          >
-            <p style={{ color: 'black' }}>Check if patient shows symptoms of or has been exposed to COVID-19</p>
-            <input
-              name="covid"
-              type="checkbox"
-              checked={this.state.covid}
-              onChange={() => { const current = this.state.covid; this.setState({ covid: !current }); }}
-              style={{ marginBottom: '10px' }}
-            />
-          </label>
-
-          <div
-            role="button"
-            tabIndex="0"
-            className="change-section"
-            onClick={() => {
-              const covid = this.state.covid ? 1 : 0;
-              this.props.createPatientAction(this.state.firstName, this.state.lastName, this.state.age, covid);
-              this.setState({
-                firstName: '', lastName: '', age: '', covid: false,
-              });
-            }}
-          >
-            <p>Check-In New Patient</p>
-          </div>
-
         </div>
 
       </ReactModal>

@@ -31,8 +31,6 @@ class PatientModal extends React.Component {
   }
 
   render() {
-    console.log('PATIENT MODAL PROPS');
-    console.log(this.props);
     const options = this.props.wards.map((ward) => { return ward.WardName; });
     const wardAssignment = !this.props.patient ? null : this.props.wards.find((ward) => { return ward.WardID === this.props.patient.WardID; });
     return (!this.props.patient ? <div />

@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Doctors.scss';
 import PatientModal from './PatientModal';
+import NewPatientModal from './NewPatientModal';
 
 
 class WaitingList extends React.Component {
@@ -9,12 +10,33 @@ class WaitingList extends React.Component {
     this.state = {
       open: false,
       currentPatient: null,
+      newPatientOpen: false,
     };
   }
 
   render() {
     return (
       <div className="waiting">
+        <div style={{
+          display: 'flex', justifyContent: 'space-between', marginTop: '0px', padding: '0px 20px',
+        }}
+        >
+          <p style={{
+            padding: '0px', margin: '0px', color: '#000', fontWeight: '600',
+          }}
+          >Name
+          </p>
+          <div
+            className="add-new-patient"
+            role="button"
+            tabIndex="0"
+            onClick={() => { this.setState({ newPatientOpen: true }); }}
+
+          >Add New Patient<i style={{ paddingLeft: '5px' }} className="fas fa-plus-circle" />
+          </div>
+        </div>
+
+        <NewPatientModal open={this.state.newPatientOpen} close={() => { this.setState({ newPatientOpen: false }); }} />
         {this.state.currentPatient
           ? (
             <PatientModal
