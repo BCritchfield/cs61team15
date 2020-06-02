@@ -32,7 +32,7 @@ const Sidebar = (props) => {
           <p>{hours}:{d.getMinutes()}{amPm}</p>
         </div>
         <div>
-          <button className="sign-out-button" type="submit">Sign Out</button>
+          <form action="/"><button className="sign-out-button" type="submit">Sign Out</button></form>
         </div>
       </div>
     </div>

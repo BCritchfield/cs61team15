@@ -20,7 +20,7 @@ class Doctors extends React.Component {
         <div className="doctors-header"><div>Name</div><div>Specialty Codes</div></div>
         {this.props.doctors.map((doctor) => (
           <div key={doctor} role="button" tabIndex="0" onClick={() => { this.setState({ selectedDoctor: doctor, open: true }); }} className="doctor">
-            <div>{doctor.FirstName} {doctor.LastName}</div><div>4, 2, 10</div>
+            <div>{doctor.FirstName} {doctor.LastName}</div>
           </div>
         ))}
       </div>

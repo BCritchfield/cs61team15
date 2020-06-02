@@ -28,7 +28,17 @@ class Buildings extends React.Component {
         <BuildingModal hospital={this.state.currentBuilding} onRequestClose={() => { this.setState({ modalOpen: false }); }} patients={this.props.patients} open={this.state.modalOpen} />
         {
           this.props.wards.map(
-            (ward) => <div key={ward.WardName} role="button" tabIndex="0" onClick={() => { this.setState({ modalOpen: true, currentBuilding: ward }); }} className="building">{ward.WardName}</div>,
+            (ward) => (
+              <div
+                key={ward.WardName}
+                role="button"
+                tabIndex="0"
+                onClick={() => { this.setState({ modalOpen: true, currentBuilding: ward }); }}
+                className={ward.COVIDExposed ? 'building covid-building' : 'building'}
+              >
+                {ward.WardName}
+              </div>
+            ),
           )
         }
       </div>

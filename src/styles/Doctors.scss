@@ -24,11 +24,21 @@ $light-grey: #f1f1f1;
   border-bottom: 1px solid rgb(209, 209, 209);
 }
 
+.covid-doctor{
+background: pink;
+}
+
 .doctor:hover{
   font-weight: 500;
   cursor: pointer;
   background: $light-grey;
 }
+
+.covid-doctor:hover{
+  font-weight: 500;
+  cursor: pointer;
+  background: pink;
+  }
 
 .waiting{
 

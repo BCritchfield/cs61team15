@@ -123,7 +123,7 @@ class NewPatientModal extends React.Component {
             className="change-section"
             onClick={() => {
               const covid = this.state.covid ? 1 : 0;
-              this.props.createPatientAction(this.state.firstName, this.state.lastName, this.state.age, covid);
+              this.props.createPatientAction(this.state.firstName, this.state.lastName, this.state.age, (covid ? '1' : '0'));
               this.setState({
                 firstName: '', lastName: '', age: '', covid: false,
               });

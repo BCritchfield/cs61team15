@@ -49,12 +49,14 @@ class WaitingList extends React.Component {
           : ''}
         {
           this.props.patients.map((patient) => {
+            console.log('patient');
+            console.log(patient);
             return (
               <div
                 role="button"
                 tabIndex="0"
                 onClick={() => { this.setState({ currentPatient: patient, open: true }); }}
-                className="doctor"
+                className={patient.COVIDPositive === 1 ? 'doctor covid-doctor' : 'doctor'}
                 style={{ color: 'black' }}
               >{patient.FirstName} {patient.LastName}
               </div>

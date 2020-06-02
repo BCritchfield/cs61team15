@@ -83,9 +83,7 @@ class DoctorModal extends React.Component {
             <p>Change Section Assignment</p>
 
           </div>
-          <div className="doctor-delete">
-            <p>Delete</p>
-          </div>
+
         </div>
         <Dropdown value={this.state.newSection} onChange={this.handleChange} style={{ margin: '20px' }} options={options} placeholder="Select new section" />
 

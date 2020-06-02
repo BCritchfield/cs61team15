@@ -31,7 +31,10 @@ class PatientModal extends React.Component {
   }
 
   render() {
-    const options = this.props.wards.map((ward) => { return ward.WardName; });
+    let options = this.props.wards.map((ward) => { return ward.WardName; });
+    if (this.props.patient && this.props.patient.COVIDPositive) {
+      options = this.props.wards.filter((ward) => { return ward.COVIDExposed; }).map((ward) => { return ward.WardName; });
+    }
     const wardAssignment = !this.props.patient ? null : this.props.wards.find((ward) => { return ward.WardID === this.props.patient.WardID; });
     return (!this.props.patient ? <div />
       : (
@@ -62,12 +65,12 @@ class PatientModal extends React.Component {
         >
           <div className="doctor-info">
             <div style={{ display: 'flex', lineHeight: '0', justifyContent: 'space-between' }}>
-              <p>{this.props.patient.FirstName} {this.props.patient.LastName}</p>
+              <p style={this.props.patient.COVIDPositive ? { color: 'pink' } : {}}>{this.props.patient.FirstName} {this.props.patient.LastName}</p>
               <button type="submit" onClick={this.props.onRequestClose}>x</button>
             </div>
 
-            <p>Section Assignment: {!wardAssignment ? '' : wardAssignment.WardName}</p>
-            <p>COVID Status: {this.props.patient.COVIDPositive ? '1' : '0'}</p>
+            <p>Section Assignment: {!wardAssignment ? 'none' : wardAssignment.WardName}</p>
+            <p>COVID Status: {this.props.patient.COVIDPositive ? 'Positive' : 'Negative'}</p>
           </div>
           <div className="doctor-actions">
             <div
@@ -76,18 +79,26 @@ class PatientModal extends React.Component {
               className="change-section"
               onClick={this.handleSubmit}
             >
-              <p>Move Patient to New Ward</p>
+              <p>{wardAssignment ? 'Move Patient to New Ward' : 'Check In Patient to New Ward'} </p>
 
             </div>
-            <div
-              role="button"
-              tabIndex="0"
-              onClick={() => { this.props.onDelete(this.props.patient.personID); this.props.onRequestClose(); }}
-              className="doctor-delete"
-            >
-              <p>Check Out </p>
-            </div>
+            {!wardAssignment ? <div />
+              : (
+                <div
+                  role="button"
+                  tabIndex="0"
+                  onClick={() => { this.props.onDelete(this.props.patient.personID); this.props.onRequestClose(); }}
+                  className="doctor-delete"
+                >
+                  <p>Check Out </p>
+                </div>
+              )}
           </div>
+          <p style={{
+            color: 'red', padding: '0px', margin: '0px', marginTop: '-5px', fontSize: '10px',
+          }}
+          >{this.props.patient.COVIDPositive ? 'Patient is COVID Postive and may only be checked in to COVID Positive Units' : ''}
+          </p>
           <Dropdown value={this.state.newSection} onChange={this.handleChange} style={{ margin: '20px' }} options={options} placeholder="Select new section" />
 
         </ReactModal>
